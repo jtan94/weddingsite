@@ -38,6 +38,7 @@ class RSVP(models.Model):
 
 
 class InvitedGuest(model.Model) :
+    rsvpModel = models.ForeignKey(RSVP, on_delete=models.CASCADE)
     guest_name = models.CharField(max_length=200)
     rsvp = models.BooleanField
     dietary_restrictions = models.BooleanField
