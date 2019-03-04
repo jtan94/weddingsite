@@ -21,7 +21,7 @@ class Choice(models.Model):
 class RSVP(models.Model):
     rsvp_code = models.CharField(max_length=8)
     rsvp_name = models.CharField(max_length=200)
-    additional_guests = models.IntegerField
+    additional_guests = models.IntegerField(default=0)
 
     def __str__(self):
         return self.rsvp_name
@@ -43,8 +43,8 @@ class RSVP(models.Model):
 class InvitedGuest(models.Model):
     rsvpModel = models.ForeignKey(RSVP, on_delete=models.CASCADE)
     guest_name = models.CharField(max_length=200)
-    rsvp = models.BooleanField
-    dietary_restrictions = models.BooleanField
+    rsvp = models.BooleanField(default=False)
+    dietary_restrictions = models.BooleanField(default=False)
 
     def __str__(self):
         return self.guest_name
