@@ -1,14 +1,18 @@
 from django.http import HttpResponse
 from django.template import loader
-
+from .models import RSVP
 from .models import Question
 
 
 def index(request):
+    all_wedding_rsvps = RSVP.objects.all()
+    for test in all_wedding_rsvps:
+        print (test.rsvp_name)
+
     latest_question_list = Question.objects.order_by('-pub_date')[:5]
     template = loader.get_template('polls/index.html')
     context = {
-        'latest_question_list': latest_question_list,
+        'rsvps': all_wedding_rsvps,
     }
     return HttpResponse(template.render(context, request))
 
