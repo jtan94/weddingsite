@@ -21,8 +21,11 @@ class Choice(models.Model):
 class RSVP(models.Model):
     rsvp_code = models.CharField(max_length=8)
     rsvp_name = models.CharField(max_length=200)
-    invited_guests = [models.InvitedGuest]
     additional_guests = models.IntegerField
+
+    def __str__(self):
+        return self.rsvp_name
+
 
     #example Predefined Guests
     ##uniqueIdentifier = 12345dfd
@@ -37,9 +40,13 @@ class RSVP(models.Model):
     ##AdditionalGuests = 1 (when this field != 0, will be prompted to add a guest, if they decline the RSVP finishes, else prompted to enter guests name and dietary restrictions)
 
 
-class InvitedGuest(model.Model) :
+class InvitedGuest(models.Model):
     rsvpModel = models.ForeignKey(RSVP, on_delete=models.CASCADE)
     guest_name = models.CharField(max_length=200)
     rsvp = models.BooleanField
     dietary_restrictions = models.BooleanField
+
+    def __str__(self):
+        return self.guest_name
+
 
